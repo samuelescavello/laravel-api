@@ -17,4 +17,22 @@ class ProjectController extends Controller
         ]);
 
     }
+
+    public function show($id)
+    {
+        $project = Project::where('id',$id)->with('category','tags')->first();
+        if($project){
+            return response()->json([
+                'success' => true,
+                'results' => $project
+            ]);
+        }else{
+            return response()->json([
+                'success' => false,
+                'results' => 'Project not found'
+
+            ]);
+        }
+
+    }
 }
